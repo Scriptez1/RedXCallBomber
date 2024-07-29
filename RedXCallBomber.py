@@ -15,10 +15,15 @@ except ImportError:
 import random
 import hashlib
 import time
+
 time.sleep(1)
+
 print(Fore.GREEN + "Modüller Başarıyla Derlendi." + Fore.RESET)
+
 time.sleep(2)
+
 os.system("cls")
+
 print(Fore.RED + '''
 ██████╗░ ███████╗ ██████╗░ ██╗░░██╗
 ██╔══██╗ ██╔════╝ ██╔══██╗ ╚██╗██╔╝
@@ -32,8 +37,15 @@ print (Fore.CYAN + "Numaranın Başına Ülke Kodu Ekleyiniz (+90)" + Fore.RESET
 time.sleep(1)
 print (Fore.MAGENTA + "Örnek No: +905555555555" + Fore.RESET)
 time.sleep(1)
-phone_number = input(Fore.RED + "\nNumara Giriniz: " + Fore.RESET)
-miktar = int(input(Fore.RED + "Kaç kez spam göndermek istiyorsunuz: " + Fore.RESET))
+phone_number = input(Fore.LIGHTRED_EX + "\nNumara Giriniz: " + Fore.RESET)
+miktar = int(input(Fore.BLUE + "\nKaç kez spam göndermek istiyorsunuz [Max:10]: " + Fore.RESET))
+
+
+if miktar > 10:
+    print(Fore.RED + "Maksimum 10 kez spam gönderebilirsiniz." + Fore.RESET)
+    exit()
+else:
+    pass
 
 asa = '123456789'
 gigk = ''.join(random.choice(asa) for i in range(10))
@@ -60,12 +72,12 @@ def send_spam(phone_number):
             '"minorVersion":34}},"phoneNumber":"' + phone_number + '","region":"region-2","sequenceNo":1}')
     response = requests.post(url, headers=headers, data=data)
     if response.status_code == 200:
-        print(Fore.GREEN + 'Başarıyla Gönderildi.' + Fore.RESET)
+        print(Fore.GREEN + '[+] Başarıyla Gönderildi.' + Fore.RESET)
     else:
-        print(Fore.RED + 'Arama Gönderilemedi.' + Fore.RESET)
+        print(Fore.RED + '[-] Arama Gönderilemedi.' + Fore.RESET)
 
 
 while miktar != 0:
     send_spam(phone_number)
     time.sleep(1)
-    miktar -=    1
+    miktar -= 1
